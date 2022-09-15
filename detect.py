@@ -161,11 +161,6 @@ def run(
                         line = (cls, *xyxy, conf) if save_conf else (cls, *xyxy)  # label format
                         with open(f'{txt_path}.txt', 'a') as f:
                             f.write(('%g ' * len(line)).rstrip() % line + '\n')
-
-                    if save_img or save_crop or view_img:  # Add bbox to image
-                        c = int(cls)  # integer class
-                        label = None if hide_labels else (names[c] if hide_conf else f'{names[c]} {conf:.2f}')
-                        annotator.box_label(xyxy, label, color=colors(c, True))
                     if save_crop:
                         c = int(cls)
                         save_one_box(xyxy, imc, file=save_dir / 'crops'  / f'{p.stem}' / f'{names[c]}_{xyxy[0]}_{xyxy[1]}_{xyxy[2]}_{xyxy[3]}.jpg', BGR=True)
